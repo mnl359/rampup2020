@@ -15,21 +15,21 @@ steps:
 - name: build docker web image
   image: plugins/docker
   repo: mcarras1/rampup2020
-  dockerfile: Dockerfile_web
   settings:
+    dockerfile: Dockerfile_web
     username: 
         from_secret: DOCKER_USERNAME
     password:
         from_secret: DOCKER_PASSWORD
-  auto_tag: true
+    auto_tag: true
 
 - name: build docker database image
   image: plugins/docker
   repo: mcarras1/rampup2020
-  dockerfile: Dockerfile_database
   settings:
+    dockerfile: Dockerfile_database
     username: 
         from_secret: DOCKER_USERNAME
     password:
         from_secret: DOCKER_PASSWORD
-  auto_tag: true
+    auto_tag: true
