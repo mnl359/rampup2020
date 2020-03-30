@@ -6,8 +6,8 @@ name: mail2clients
 steps:
 - name: build and test
   image: maven:3.6.3-jdk-11-openj9
-  pom: mail2clients/pom.xml
   commands:
+  - cd mail2clients
   - mvn compile
   - mvn test
   - mvn package
