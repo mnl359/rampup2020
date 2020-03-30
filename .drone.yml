@@ -11,12 +11,11 @@ steps:
   - mvn compile
   - mvn test
   - mvn package
-  - cd ..
 
 - name: build docker web image
   image: plugins/docker
   repo: mcarras1/rampup2020
-  dockerfile: Dockerfile.web
+  dockerfile: Dockerfile_web
   settings:
     username: 
         from_secret: DOCKER_USERNAME
@@ -27,7 +26,7 @@ steps:
 - name: build docker database image
   image: plugins/docker
   repo: mcarras1/rampup2020
-  dockerfile: Dockerfile.database
+  dockerfile: Dockerfile_database
   settings:
     username: 
         from_secret: DOCKER_USERNAME
