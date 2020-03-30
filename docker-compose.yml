@@ -2,33 +2,29 @@ version: "3"
 services:
     web:
         container_name: web
-        image: tomcat:9
+        build:
+            context: .
+            dockerfile: Dockerfile.web
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         ports: 
             - 8080:8080
-        volumes:
-            - ./mail2clients/target/mail2clients.war:/usr/local/tomcat/webapps/ROOT.war
         depends_on: 
             - database
             - smtp
     database:
         container_name: postgres
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile.database
         environment:
-            POSTGRES_USER: admin_db
-            POSTGRES_PASSWORD: Adm1n_d4ta
-            POSTGRES_DB: mail2clients
-        ports:
-            - "8001:5432"
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     smtp:
         container_name: smtp_mail2clients
         image: namshi/smtp
-        #image: catatnight/postfix
         restart: always
-        ports:
-            - 25:25
         environment: 
-        #    maildomain: mail2clients.com
-        #    smtp_user: user:pwd
-            DISABLE_IPV6: "true"
-            GMAIL_USER: $GMAIL_USER
-            GMAIL_PASSWORD: $GMAIL_PASSWORD
+            GMAIL_USER: ${GMAIL_USER}
+            GMAIL_PASSWORD: ${GMAIL_PASSWORD}

@@ -3,6 +3,8 @@ Interns Rampup January 2020
 
 ## Mail2Clients 
 
+[![Build Status](https://cloud.drone.io/api/badges/mnl359/rampup2020/status.svg)](https://cloud.drone.io/mnl359/rampup2020)
+
 This web application will let you send emails by using **JAVA 1.8** REST services.     
 You need to use MAVEN to create the .war actifact that runs over a *Tomcat* server.       
 An additional logging service is included, the emails sent are storaged on a *Postgres* database.    
