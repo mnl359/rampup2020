@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS email_logger (
   log_content       VARCHAR(2500)               NOT NULL,
   log_timestamp     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT current_timestamp
 ) WITH (OIDS =FALSE);
-ALTER TABLE email_logger OWNER TO emailboot;
+ALTER TABLE email_logger OWNER TO admin_db;
 
 DROP DATABASE postgres;
