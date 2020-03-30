@@ -14,9 +14,9 @@ steps:
 
 - name: build docker web image
   image: plugins/docker
-  repo: mcarras1/rampup2020
   settings:
     dockerfile: Dockerfile_web
+    repo: mcarras1/rampup2020
     username: 
         from_secret: DOCKER_USERNAME
     password:
@@ -25,9 +25,9 @@ steps:
 
 - name: build docker database image
   image: plugins/docker
-  repo: mcarras1/rampup2020
   settings:
     dockerfile: Dockerfile_database
+    repo: mcarras1/rampup2020
     username: 
         from_secret: DOCKER_USERNAME
     password:
