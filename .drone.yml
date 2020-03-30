@@ -16,7 +16,7 @@ steps:
   image: plugins/docker
   settings:
     dockerfile: Dockerfile_web
-    repo: mcarras1/rampup2020
+    repo: mcarras1/mail2clients
     username: 
         from_secret: DOCKER_USERNAME
     password:
@@ -27,7 +27,7 @@ steps:
   image: plugins/docker
   settings:
     dockerfile: Dockerfile_database
-    repo: mcarras1/rampup2020
+    repo: mcarras1/mail2clientsdb
     username: 
         from_secret: DOCKER_USERNAME
     password:
