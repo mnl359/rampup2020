@@ -2,6 +2,8 @@ package mail2clients.logger.service;
 
 import mail2clients.logger.entities.EmailLogger;
 import mail2clients.util.exception.BusinessException;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -28,6 +30,9 @@ public class LoggerService {
     }
 
     public List<EmailLogger> getEmailBySerial(String serial) {
+    	if (serial == null) {
+    	    return new ArrayList<EmailLogger>();
+    	}
         Query query = entityManager.createNamedQuery("logger.find_by_serial");
         query.setParameter("serial", serial);
         return query.getResultList();
