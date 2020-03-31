@@ -16,7 +16,7 @@ class LoggerServiceTest {
         LoggerService loggerService = new LoggerService();
         List<EmailLogger> listEmaiLogger = loggerService.getEmailBySerial(null);
 		int listSize = listEmaiLogger.size();
-		assertEquals(1,listSize,"Esperaba una lista de tamaño cero");
+		assertEquals(0,listSize,"Esperaba una lista de tamaño cero");
 	}
 
 }
