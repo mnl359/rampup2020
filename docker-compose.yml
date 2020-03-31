@@ -2,9 +2,7 @@ version: "3"
 services:
     web:
         container_name: web
-        build:
-            context: .
-            dockerfile: Dockerfile.web
+        image: mcarras1/mail2clients:latest
         environment:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -15,9 +13,7 @@ services:
             - smtp
     database:
         container_name: postgres
-        build:
-            context: .
-            dockerfile: Dockerfile.database
+        image: mcarras1/mail2clientsdb:latest
         environment:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
