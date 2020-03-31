@@ -100,7 +100,7 @@ public class RestMail {
             props.put("mail.smtp.starttls.enable", smtpProperties.getEnableTls());
             props.put("mail.smtp.host", smtpProperties.getHost());
             props.put("mail.smtp.port", smtpProperties.getPort());
-            javax.mail.Session session = session = javax.mail.Session.getInstance(props,
+            javax.mail.Session session = javax.mail.Session.getInstance(props,
                     new javax.mail.Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(smtpProperties.getUsername(), smtpProperties.getPassword());
@@ -112,8 +112,9 @@ public class RestMail {
             emailDraft.setRecipients(Message.RecipientType.BCC, EmailFields.getRecipientsWithFormat(mailingList));
             emailDraft.setSubject(subject, "UTF-8");
             emailDraft.setSentDate(new Date());
+            emailDraft.setContent(content, "UTF-8");
+            //emailDraft.setContent(VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailProperties.getVelocityTemplate(), "UTF-8", mailProperties), "text/html; charset=utf-8");
 
-            emailDraft.setContent(VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailProperties.getVelocityTemplate(), "UTF-8", mailProperties), "text/html; charset=utf-8");
 
             Transport.send(emailDraft);
             loggerService.addEmailLog(response.getSerial(), subject, true, "Email build and send to SMTP");
