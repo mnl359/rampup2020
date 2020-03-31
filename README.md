@@ -13,7 +13,7 @@ This web application allows the user to send emails by using **JAVA 1.8** REST s
   <img width="150" height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png">
 </p>
 
-This aplication use a **Tomcat server** that runs .war artifact, a **SMTP server** to send the emails and a **Postgres database** where the emails sent are storaged. Also, the artifact are build with **Maven**.
+This application uses a **Tomcat server** that runs .war artifact, an **SMTP server** to send the emails and a **Postgres database** where the emails sent are stored. Also, the artifact is built with **Maven**.
 
 For this case, you will need:
 
@@ -26,18 +26,18 @@ For this case, you will need:
 ## Usage
 
 ### Deploy
-For deploy, the variables POSTGRES_USER, POSTGRES_PASSWORD, GMAIL_USER and GMAIL_PASSWORD must be set.
+For deploy, the variables POSTGRES_USER, POSTGRES_PASSWORD, GMAIL_USER, and GMAIL_PASSWORD must be set.
 ```sh
 export POSTGRES_USER=admin_db
 export POSTGRES_PASSWORD=<password of your choice>
-export GMAIL_USER=<your gmail username>
-export GMAIL_PASSWORD=<your gmail password>
+export GMAIL_USER=<your Gmail username>
+export GMAIL_PASSWORD=<your Gmail password>
 docker-compose up --build
 ```
 > **_NOTE:_**  You must enable less secure apps to access Gmail with this [Tutorial](https://hotter.io/docs/email-accounts/secure-app-gmail/).
 
 ### Test
-In this examples, It is recommended to use the **Python 3** with the requests module to access the endpoints.
+In these examples, It is recommended to use the **Python 3** with the requests module to access the endpoints.
 
 #### Initial service test 
 
@@ -53,17 +53,17 @@ Mail2CLients - Rest Service - Test Succeeded!
 
 #### Send an email
 
-Once all the services required are running, you can test the webapp by accessing:
+Once all the services required are running, you can test the web app by accessing:
 ```sh
 POST rest service
     http://localhost:8080/v1/emails
 
 Parameters
-    "subject" Suject of the email, it will be used on email inbox. Example: Hello I'm here!
-    "content" Text content, please do not add javascript in this filed, mailboxs validate javascript conent and they will reject the email. 
-    "recipients" List of emails addresses to send the email, if they are more that one separate them with ';'. Example: test@mail.com; test2@mail.com;.
+    "subject" Subject of the email, it will be used on email inbox. Example: Hello I'm here!
+    "content" Text content, please do not add javascript in this filed, mailbox validate javascript content and they will reject the email. 
+    "recipients" List of email addresses to send the email, if they are more that one separate them with ';'. Example: test@mail.com; test2@mail.com;.
 ```
-
+Python script to access to the endpoint:
 ```python
 from requests import get, post
 
@@ -72,7 +72,7 @@ print(r.text[:700] + '...')
 
 ```
 
-If the request was process correctly the output should be like this:
+If the request was processed correctly the output should be like this:
 ```sh
 {
   "code": 202,
@@ -93,7 +93,7 @@ If the request was process correctly the output should be like this:
 
 #### List of emails logged
 
-Another REST service include in the JAVA app is list all delivered emails.
+Another REST service includes in the JAVA app is the list of all delivered emails.
 ```sh
 GET rest service
     http://localhost:8080/v1/logger?startDate=&endDate=2017-12-01 00:00&onlyDelivered=false
@@ -101,9 +101,9 @@ GET rest service
 Parameters
     "startDate" Initial date to search. Example: 2017-01-01 00:00
     "endDate" Final date to search. Example: 2017-12-01 00:00
-    "onlyDelivered" It will filter the results by only deliverd emails. Example: false *To return all emails on log.
-  ```
-
+    "onlyDelivered" It will filter the results by only delivered emails. Example: false *To return all emails on log.
+```
+Python script to access to the endpoint:
 ```python
 from requests import get, post
 
@@ -134,7 +134,7 @@ This is the expected output:
 
 #### List of emails logged by Serial or Subject
 
-Search REST services included: By Serial or Subject. Filter by subject will return all the emails that contains the keywords sent.
+Search REST services included: By Serial or Subject. Filter by subject will return all the emails that contain the keywords sent.
  
 ```sh
 GET rest services
@@ -144,8 +144,9 @@ GET rest services
 Parameters
     "subject" Text to filter by. Example: Docker Test
     "serial" Generated id to filter by. Example: 1491359396709
-  ```
+```
 
+Python script to access to the endpoint:
 ```python
 from requests import get, post
 
@@ -188,39 +189,4 @@ This is the expected output:
     }
   ]
 }
-```
-
-### App configuration 
-
-- **Application.properties**     
- https://github.com/zelfick/rampup2020/blob/master/mail2clients/src/main/resources/application.properties
-```sh
-    #Database connection information
-    database.xyz 
-    ...
-
-    #This app uses Hibernate, here are the configuration parameters
-    hibernate.xyz
-
-    #SMTP connection information, please include yours email setup
-    mail.xyz
-
-    #Included as well Velocity library to send templated emails
-    velocity.template 
- ```
-
-- **Database initial script**     
-This table is required prior the application's start, so please prepare the database and run it before any use. (Script included into the repository).
-https://github.com/zelfick/rampup2020/blob/master/mail2clients/db_initial_script.sql
-```sh
-CREATE TABLE IF NOT EXISTS email_logger (
-  log_id            SERIAL                      NOT NULL,
-  log_serial        VARCHAR(100)                NOT NULL,
-  log_subject       VARCHAR(100)                NOT NULL,
-  log_delivered     BOOL                        NOT NULL DEFAULT 'false',
-  log_content       VARCHAR(2500)               NOT NULL,
-  log_timestamp     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT current_timestamp
-) WITH (OIDS =FALSE);
-ALTER TABLE email_logger OWNER TO admin_db;
-DROP DATABASE postgres;
 ```
