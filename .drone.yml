@@ -26,7 +26,8 @@ steps:
         from_secret: DOCKER_USERNAME
     password:
         from_secret: DOCKER_PASSWORD
-    auto_tag: true
+    tag:
+        - 1.0
 
 - name: build docker database image
   image: plugins/docker
@@ -37,4 +38,5 @@ steps:
         from_secret: DOCKER_USERNAME
     password:
         from_secret: DOCKER_PASSWORD
-    auto_tag: true
+    tag:
+        - 1.0
