@@ -21,6 +21,7 @@ steps:
   image: plugins/docker
   settings:
     dockerfile: Dockerfile_web
+    context: .
     repo: mcarras1/mail2clients
     username: 
         from_secret: DOCKER_USERNAME
@@ -34,6 +35,7 @@ steps:
   image: plugins/docker
   settings:
     dockerfile: Dockerfile_database
+    context: .
     repo: mcarras1/mail2clientsdb
     username: 
         from_secret: DOCKER_USERNAME

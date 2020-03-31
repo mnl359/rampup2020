@@ -112,8 +112,7 @@ public class RestMail {
             emailDraft.setRecipients(Message.RecipientType.BCC, EmailFields.getRecipientsWithFormat(mailingList));
             emailDraft.setSubject(subject, "UTF-8");
             emailDraft.setSentDate(new Date());
-            emailDraft.setContent(content, "UTF-8");
-            //emailDraft.setContent(VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailProperties.getVelocityTemplate(), "UTF-8", mailProperties), "text/html; charset=utf-8");
+            emailDraft.setContent(VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailProperties.getVelocityTemplate(), "UTF-8", mailProperties), "text/html; charset=utf-8");
 
 
             Transport.send(emailDraft);
