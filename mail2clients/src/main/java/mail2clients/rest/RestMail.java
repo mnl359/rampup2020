@@ -117,7 +117,7 @@ public class RestMail {
 
 
             Transport.send(emailDraft);
-            loggerService.addEmailLog(response.getSerial(), subject, true, "Email build and send to SMTP");
+            loggerService.addEmailLog(response.getSerial(), subject, true, content);
             logger.log(Level.INFO, StatusEnum.NOTIFICATION_ACCEPTED.getStatus() + response.toString());
             return BuildResponse.status(HttpStatus.ACCEPTED, BuildResponse.buildURL(request), StatusEnum.NOTIFICATION_ACCEPTED.getStatus(), response);
 
